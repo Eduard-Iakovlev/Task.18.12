@@ -12,6 +12,7 @@ void setFilePermissions(const char* filename) {
 }
 
 int main() {
+    setlocale(LC_ALL, "Russia");
     // Имя файла для User
     const char* userFileName = "user.dat";
 
@@ -21,7 +22,7 @@ int main() {
     // Создаем объекты User и Message
     User user;
     std::string name, login, pass;
-    std::cout << "Enter name: ";
+    std::cout << "Enter имя: ";
     std::cin >> name;
     std::cout << "Enter login: ";
     std::cin >> login;
