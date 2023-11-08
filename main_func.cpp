@@ -5,24 +5,23 @@
 #include "User.h"
 #include "Message.h"
 
-// Функция для установки прав доступа к файлу
+// Р¤СѓРЅРєС†РёСЏ РґР»СЏ СѓСЃС‚Р°РЅРѕРІРєРё РїСЂР°РІ РґРѕСЃС‚СѓРїР° Рє С„Р°Р№Р»Сѓ
 void setFilePermissions(const char* filename) {
-    // Устанавливаем права доступа 0600 (чтение и запись только владельцу)
+    // РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј РїСЂР°РІР° РґРѕСЃС‚СѓРїР° 0600 (С‡С‚РµРЅРёРµ Рё Р·Р°РїРёСЃСЊ С‚РѕР»СЊРєРѕ РІР»Р°РґРµР»СЊС†Сѓ)
     chmod(filename, S_IRUSR | S_IWUSR);
 }
 
 int main() {
-    setlocale(LC_ALL, "Russia");
-    // Имя файла для User
+    // РРјСЏ С„Р°Р№Р»Р° РґР»СЏ User
     const char* userFileName = "user.dat";
 
-    // Имя файла для Message
+    // РРјСЏ С„Р°Р№Р»Р° РґР»СЏ Message
     const char* messageFileName = "message.dat";
 
-    // Создаем объекты User и Message
+    // РЎРѕР·РґР°РµРј РѕР±СЉРµРєС‚С‹ User Рё Message
     User user;
     std::string name, login, pass;
-    std::cout << "Enter имя: ";
+    std::cout << "Р’РІРµРґРёС‚Рµ РІР°С€Рµ РёРјСЏ: ";
     std::cin >> name;
     std::cout << "Enter login: ";
     std::cin >> login;
@@ -40,7 +39,7 @@ int main() {
     message.addReceiver(receiver);
     message.addSender(name);
 
-    // Записываем данные в файлы с правами доступа
+    // Р—Р°РїРёСЃС‹РІР°РµРј РґР°РЅРЅС‹Рµ РІ С„Р°Р№Р»С‹ СЃ РїСЂР°РІР°РјРё РґРѕСЃС‚СѓРїР°
     std::ofstream userFile(userFileName);
     if (userFile.is_open()) {
         userFile << user.rec_name() << "\n";
@@ -48,7 +47,7 @@ int main() {
         userFile << user.rec_pass() << "\n";
         userFile.close();
 
-        // Устанавливаем права доступа к файлу
+        // РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј РїСЂР°РІР° РґРѕСЃС‚СѓРїР° Рє С„Р°Р№Р»Сѓ
         setFilePermissions(userFileName);
     }
     else {
@@ -63,7 +62,7 @@ int main() {
         messageFile << message.rec_receiver() << "\n";
         messageFile.close();
 
-        // Устанавливаем права доступа к файлу
+        // РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј РїСЂР°РІР° РґРѕСЃС‚СѓРїР° Рє С„Р°Р№Р»Сѓ
         setFilePermissions(messageFileName);
     }
     else {
@@ -71,7 +70,7 @@ int main() {
         return 1;
     }
 
-    // Чтение данных из файлов
+    // Р§С‚РµРЅРёРµ РґР°РЅРЅС‹С… РёР· С„Р°Р№Р»РѕРІ
     std::ifstream userFileRead(userFileName);
     if (userFileRead.is_open()) {
         std::string name, login, pass;
@@ -81,7 +80,7 @@ int main() {
         User loadedUser;
         loadedUser.addUser(name, login, pass);
 
-        // Вывод загруженных данных
+        // Р’С‹РІРѕРґ Р·Р°РіСЂСѓР¶РµРЅРЅС‹С… РґР°РЅРЅС‹С…
         std::cout << "\n\n Print data from filesdada\n\n";
         std::cout << "Loaded User:\n";
         std::cout << "Name: " << loadedUser.rec_name() << "\n";
@@ -104,7 +103,7 @@ int main() {
         loadedMessage.addSender(sender);
         loadedMessage.addReceiver(receiver);
 
-        // Вывод загруженных данных
+        // Р’С‹РІРѕРґ Р·Р°РіСЂСѓР¶РµРЅРЅС‹С… РґР°РЅРЅС‹С…
         std::cout << "Loaded Message:\n";
         std::cout << "Text: " << loadedMessage.rec_text() << "\n";
         std::cout << "Sender: " << loadedMessage.rec_sender() << "\n";
